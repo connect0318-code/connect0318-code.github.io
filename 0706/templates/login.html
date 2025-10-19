@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>호그와트 로그인</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            display: flex;
+            flex-direction: column; /* 메시지 표시를 위해 column으로 변경 */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://i.pinimg.com/originals/f3/f1/b7/f3f1b7f0e7f7e9f3b1b7a4f5f5f0f0f0.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            margin: 0;
+            padding: 20px;
+        }
+        .flash-messages {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .flash-messages .success {
+            color: #aaffaa;
+        }
+        .flash-messages .danger {
+            color: #ffaaaa;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px 60px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 3px solid #b38b00; /* 황금색 테두리 */
+            max-width: 450px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        h1 {
+            color: #ffd700; /* 금색 */
+            margin-bottom: 30px;
+            font-size: 3em;
+            letter-spacing: 2px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.3em;
+            color: #e0e0e0;
+        }
+        .input-group input[type="text"],
+        .input-group input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #8b4513; /* 갈색 테두리 */
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1.1em;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .input-group input[type="text"]:focus,
+        .input-group input[type="password"]:focus {
+            border-color: #ffd700;
+            background-color: rgba(255, 255, 255, 0.2);
+            outline: none;
+        }
+        button {
+            background-color: #4a0000; /* 진한 버건디 */
+            color: #ffd700;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #6a0000;
+            color: #ffe066;
+            transform: translateY(-2px);
+        }
+        /* 오디오 태그 숨기기 */
+        audio {
+            display: none; /* 오디오 컨트롤러를 숨깁니다 */
+        }
+    </style>
+</head>
+<body>
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="container">
+        <h1>호그와트 입학을 환영합니다!</h1>
+        <form method="POST">
+            <div class="input-group">
+                <label for="username">사용자 이름:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">마법의 문 열기</button>
+        </form>
+    </div>
+
+    <audio id="background-music" loop autoplay>
+        <source src="{{ url_for('static', filename='audio/hedwigs_theme.mp3') }}" type="audio/mpeg">
+        브라우저가 오디오 재생을 지원하지 않습니다.
+    </audio>
+
+    <script>
+        // 모든 브라우저에서 자동 재생이 잘 작동하도록 추가 스크립트
+        window.onload = function() {
+            var audio = document.getElementById('background-music');
+            audio.volume = 0.3; // 볼륨 조절 (0.0 ~ 1.0)
+            audio.play().catch(function(error) {
+                // 사용자의 상호작용 없이는 자동 재생이 차단될 수 있습니다.
+                console.log("오디오 자동 재생이 차단되었습니다:", error);
+                // 필요하다면 재생 버튼 등을 표시하여 사용자가 직접 재생하도록 유도할 수 있습니다.
+            });
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+/* 전체 페이지 스타일 */
+body {
+    font-family: 'Magic', cursive, sans-serif; /* 'Magic'은 해리포터 테마 폰트 (아래 설명 참조) */
+    background: url('../images/hogwarts_bg.jpg') no-repeat center center fixed; /* 호그와트 배경 이미지 */
+    background-size: cover; /* 배경 이미지를 화면에 꽉 채우기 */
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    min-height: 100vh; /* 최소 높이를 화면 전체로 설정 */
+    margin: 0; /* 기본 마진 제거 */
+    color: #f0e68c; /* 글자색: 황금색 (호그와트 테마) */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 글자에 그림자 효과 */
+}
+
+/* 폰트 정의 (해리포터 테마 폰트를 사용하고 싶을 때) */
+@font-face {
+    font-family: 'Magic';
+    src: url('../fonts/HarryP.ttf') format('truetype'); /* HarryP.ttf 파일 경로 지정 */
+    /* 참고: 이 폰트는 예시입니다. 저작권이 없는 해리포터 테마 폰트를 
+       찾아 static/fonts/ 폴더에 넣고 경로를 정확히 지정해야 합니다. 
+    */
+}
+
+/* 계산기 전체 컨테이너 스타일 */
+.calculator-container {
+    background-color: rgba(30, 20, 0, 0.8); /* 어두운 나무색 (투명도 적용) */
+    border: 5px solid #8b4513; /* 진한 갈색 테두리 */
+    border-radius: 15px; /* 모서리 둥글게 */
+    padding: 25px; /* 내부 여백 */
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.7); /* 황금색 빛나는 그림자 */
+    text-align: center; /* 내부 텍스트 중앙 정렬 */
+    width: 320px; /* 고정 너비 */
+}
+
+/* 제목 (H1) 스타일 */
+h1 {
+    font-size: 2.5em; /* 글자 크기 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
+    color: #ffd700; /* 황금색 */
+}
+
+/* 계산기 화면 (결과 표시 부분) 스타일 */
+.display {
+    background-color: #4b3621; /* 어두운 갈색 */
+    color: #e0e0e0; /* 밝은 회색 글자 */
+    font-size: 2.8em; /* 글자 크기 */
+    padding: 15px; /* 내부 여백 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
+    text-align: right; /* 텍스트 오른쪽 정렬 */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* 내부 그림자 효과 */
+    min-height: 50px; /* 최소 높이 */
+    display: flex; /* Flexbox 레이아웃 사용 */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: flex-end; /* 가로 오른쪽 정렬 */
+}
+
+/* 버튼 컨테이너 스타일 */
+.buttons {
+    display: grid; /* 그리드 레이아웃 사용 */
+    grid-template-columns: repeat(4, 1fr); /* 4개의 동일한 너비 열 */
+    gap: 12px; /* 버튼 사이 간격 */
+}
+
+/* 모든 버튼 기본 스타일 */
+.btn {
+    background-color: #6b4423; /* 중간 갈색 배경 */
+    color: #f0e68c; /* 황금색 글자 */
+    border: 2px solid #8b4513; /* 진한 갈색 테두리 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    padding: 18px; /* 내부 여백 */
+    font-size: 1.8em; /* 글자 크기 */
+    cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* 부드러운 전환 효과 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* 버튼 그림자 */
+}
+
+/* 버튼 호버 (마우스 오버) 시 스타일 */
+.btn:hover {
+    background-color: #8b5a2b; /* 호버 시 약간 밝게 */
+    transform: translateY(-2px); /* 약간 위로 이동하는 효과 */
+}
+
+/* 버튼 클릭 (활성화) 시 스타일 */
+.btn:active {
+    transform: translateY(0); /* 원래 위치로 돌아가기 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* 그림자 약하게 */
+}
+
+/* 연산자 버튼 (÷, ×, -, +) 스타일 */
+.btn.operator {
+    background-color: #925829; /* 연산자 버튼 색상 */
+    color: #ffffff; /* 흰색 글자 */
+}
+
+/* '삭제' 버튼 스타일 */
+.btn.clear {
+    background-color: #a04000; /* '삭제' 버튼 색상 (더 붉은 계열) */
+    grid-column: span 1; /* 2개의 열을 차지 */
+}
+
+/* '=' 버튼 스타일 */
+.btn.equals {
+    background-color: #d4af37; /* '=' 버튼 황금색 */
+    color: #4b3621; /* 진한 갈색 글자 */
+    grid-column: span 1; /* 2개의 열을 차지 */
+}
+
+/* '0' 버튼 스타일 */
+.btn.zero {
+    grid-column: span 1; /* 2개의 열을 차지 */
+}
